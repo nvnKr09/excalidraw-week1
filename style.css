@@ -39,9 +39,14 @@
 .tools-menu{
     display: flex;
     align-items: center;
-    padding: 10px;
+    gap: 5px;
+    padding: 5px;
     border-radius: 8px;
     box-shadow: 0px 0px 3px var(--grey-border);
+}
+.vertical-line{
+    border-right: 1px solid var(--grey-border);
+    height: 24px;
 }
 .icon-div{
     width: 36px;
@@ -90,6 +95,14 @@
 .library:hover{
     background-color: rgb(240, 240, 240);
 }
+
+/* middle poster css */
+.middle-poster{
+    margin: auto;
+
+}
+
+/* foot css */
 .foot{
     height: 45px;
     margin: 1rem;
