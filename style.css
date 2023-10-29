@@ -28,14 +28,48 @@
   justify-content: space-between;
   position: relative;
 }
+
 /* canvas styling */
 #canvas{
   position: absolute;
   z-index: 5;
 }
-.crosshair{
-  cursor: crosshair;
+/* welcome msg css */
+.intro{
+  height: 100vh;
+  width: 100%;
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: var(--theme);
+  z-index: 11;
+  background-color: var(--white);
 }
+.intro > div{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.intro > div > h1{
+  text-align: center;
+  font-size: 4.5vw;
+  line-height: 2;
+}
+.intro > div > p{
+  font-size: 2.5vw;
+  color: var(--text-color);
+}
+.intro-foot{
+  position: absolute;
+  bottom: 1.2rem;
+  font-size: 1.8vw;
+  color: black;
+}
+
+/* top menu css */
 .top-menu {
   position: absolute;
   top: 1rem;
@@ -47,13 +81,14 @@
   padding-inline: 1rem;
 
 }
-.drawer-btn button {
+.drawer-btn > button {
   width: 36px;
   height: 36px;
   background-color:var(--white);
   border: 1px solid var(--grey-border);
   border-radius: 8px;
   cursor: pointer;
+  font-size: large;
 }
 .tool-div{
     box-shadow: 0px 0px 3px var(--grey-border);
@@ -96,72 +131,7 @@
   bottom: 4px;
   right: 4px;
 }
-/* editing-div css */
-.editing-div{
-  height: 250px;
-  width: 200px;
-  position: absolute;
-  left: -100%;
-  top: 80px;
-  box-shadow: 0px 0px 3px var(--grey-border);
-  border-radius: 8px;
-  color: rgb(43, 43, 43);
-  background-color:var(--white);
-  padding: 8px;
-  z-index: 10;
-  left: 1rem;
-}
-.hidden{
-  display: none;
-  left: 1rem;
-}
-.editing-inner-div1{
-  margin: 10px 0;
-}
-.editing-inner-div2{
-  display: flex;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 8px;
-}
-.readymade-color{
-  border-radius: 6px;
-  width: 27px;
-  height: 26px;
-}
-/* color picker */
-.color-picker{
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  appearance: none;
-  width: 32px;
-  height: 35px;
-  border: none;
-  border-radius: 8px;
-  background-color: transparent;
-  cursor: pointer;
-}
-.color-picker::-webkit-color-swatch{
-  border-radius: 8px;
-  /* border:none; */
-}
-.color-picker::-moz-color-swatch{
-  border-radius: 8px;
-  border:none;
-}
-.clear-canvas{
-  border: none;
-  background-color: var(--light-theme);
-  border-radius: 8px;
-  padding: 8px 10px;
-  color: var(--dark-theme);
-}
-.clear-canvas:active{
-  border: 1px solid;
-}
-
-
-/* active on click with js */
+/* active tool button on click with js */
 .active-btn{
   background-color: var(--light-theme);
   color: var(--dark-theme);
@@ -235,10 +205,78 @@
 .library span {
   color: var(--text-color);
 }
-/* middle poster css */
-.middle-poster {
-  margin: auto;
+
+/* editing-div css: */
+.editing-div{
+  height: 285px;
+  width: 200px;
+  position: absolute;
+  left: -100%;
+  top: 80px;
+  box-shadow: 0px 0px 3px var(--grey-border);
+  border-radius: 8px;
+  color: rgb(43, 43, 43);
+  background-color:var(--white);
+  padding: 8px;
+  z-index: 10;
+  transition: all .2s ease-in-out;
 }
+.hidden{
+  display: none;
+}
+.editing-inner-div1{
+  margin: 10px 0;
+}
+.editing-inner-div1 > p{
+  line-height: 24px;
+}
+.editing-inner-div2{
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.readymade-color{
+  border-radius: 6px;
+  width: 27px;
+  height: 26px;
+}
+.bg-readymade-color{
+  border-radius: 6px;
+  width: 27px;
+  height: 26px;
+}
+/* color picker */
+.color-picker{
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  width: 32px;
+  height: 35px;
+  border: none;
+  border-radius: 8px;
+  background-color: transparent;
+  cursor: pointer;
+}
+.color-picker::-webkit-color-swatch{
+  border-radius: 8px;
+  /* border:none; */
+}
+.color-picker::-moz-color-swatch{
+  border-radius: 8px;
+  border:none;
+}
+.clear-canvas{
+  border: none;
+  background-color: var(--light-theme);
+  border-radius: 8px;
+  padding: 8px 10px;
+  color: var(--dark-theme);
+}
+.clear-canvas:active{
+  border: 1px solid;
+}
+/* editing div css ends here */
 
 /* foot css */
 #foot {
@@ -345,10 +383,14 @@
   border-radius: 8px;
   cursor: pointer;
 }
-/* tablet view */
+/* foot css ends here */
+
+/* tablet view & mobile view */
 @media screen and (max-width: 768px) {
   .collab,
-  .library {
+  .library,
+  .encript,
+  .help {
     display: none;
   }
   .tool-div {
@@ -357,16 +399,15 @@
         display: none;
       }
   }
-}
-/* mobile view */
-@media screen and (max-width: 426px) {
-
-    .foot-left {
+  .foot-left {
     flex-grow: 1;
     justify-content: space-between;
   }
-  .encript,
-  .help {
-    display: none;
+  .undo-redo-div{
+    flex-grow: 1;
+  }
+  .undo,
+  .redo{
+    flex-grow: 1;
   }
 }
